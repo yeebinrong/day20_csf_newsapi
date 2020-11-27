@@ -17,6 +17,10 @@ import { NewsAPIService } from './news-api.service';
 
 import { RouterModule } from '@angular/router'
 
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
+
 const ROUTES = [
   {path:'', component: ListComponent },
   {path:'settings', component: SettingComponent },
@@ -39,9 +43,10 @@ const ROUTES = [
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    MatMomentDateModule
   ],
-  providers: [ StorageDataBase, NewsAPIService ],
+  providers: [ {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}, StorageDataBase, NewsAPIService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

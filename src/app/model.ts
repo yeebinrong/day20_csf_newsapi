@@ -23,6 +23,7 @@ export interface Article {
 }
 
 export interface ArticleArray {
+    time: Date;
     code: string;
     articles:Article[];
 }

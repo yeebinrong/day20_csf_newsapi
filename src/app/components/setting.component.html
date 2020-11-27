@@ -4,6 +4,6 @@ Settings
         <input matInput formControlName="apikey" placeholder="API for newsapi.org">
     </mat-form-field>
     <button type="button" mat-raised-button [routerLink]="['/']">Back</button>
-    <button type="button" mat-raised-button color="accent" (click)="deleteAPI()">Delete</button>
+    <button type="button" mat-raised-button color="accent" [disabled]="apiform.invalid" (click)="deleteAPI()">Delete</button>
     <button type="button" mat-raised-button color="primary" [disabled]="apiform.invalid" (click)="saveAPI()">Add</button>
 </form>

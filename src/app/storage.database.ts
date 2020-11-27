@@ -55,14 +55,8 @@ export class StorageDataBase extends Dexie {
 
         async addArticle (d:Article[], code:string):Promise<any> {
             const results = await this.db.where('code').equals(code)
-
-            // if (results) {
-            //     if (results.data.length <= 0) {
-            //         console.info(results)
-            //         return Promise.reject()
-            //     }
-            // }
             let articleArray:ArticleArray = {
+                time: new Date(),
                 code: code,
                 articles: d
             }
