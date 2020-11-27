@@ -12,6 +12,7 @@ import { StorageDataBase } from '../storage.database';
 export class DetailedComponent implements OnInit {
   code:string;
   detailed:Article[] = [];
+  checkAPI:boolean = false;
   constructor(private newsSvc: NewsAPIService, private activatedRoute: ActivatedRoute, private db:StorageDataBase) { }
 
   ngOnInit(): void {
@@ -31,6 +32,9 @@ export class DetailedComponent implements OnInit {
           this.detailed = data;
           this.db.addArticle(this.detailed, this.code);
           console.info("added article")
+        }).catch(e => {
+          console.info("check api")
+          this.checkAPI = true;
         })
     })
   }

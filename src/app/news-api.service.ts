@@ -17,38 +17,33 @@ export class NewsAPIService {
 
   constructor( private http:HttpClient, private db:StorageDataBase) { }
   
-  //@ts-ignore
-  getList():Promise<any> {
+  
+  async getList():Promise<countryArray> {
     let data = [];
     let countryArray:countryArray;
     let countryData:countryList[] = [];
     const array = this.countryCodes.split(' ');
-    this.http.get(this.listURL).toPromise()
-      .then (d => {
-        //@ts-ignore
-        for (let i of d) {
-          (array.find(code => {
-              if (code == i['alpha2Code'].toLowerCase()) {
-                let data:countryList = {
-                  name: i.name,
-                  url: i.flag,
-                  code: i.alpha2Code
-                }
-                countryData.push(data);
+    const d = await this.http.get(this.listURL).toPromise()
+    // @ts-ignore`
+    for (let i of d) {
+        (array.find(code => {
+            if (code == i['alpha2Code'].toLowerCase()) {
+              let data:countryList = {
+                name: i.name,
+                url: i.flag,
+                code: i.alpha2Code
               }
-            })
-          )
-        }
+              countryData.push(data);
+            }
+          })
+        )
       }
-    ).then (x => {
-      countryArray = {
-        id: '1',
-        data: countryData
-      }
-      console.info("country array is ", countryArray)
-      this.db.addList(countryArray)
-      return Promise.resolve();
-    })
+    countryArray = {
+      id: '1',
+      data: countryData
+    }
+    await this.db.addList(countryArray)
+    return countryArray;
   }
 
   async getNews (code:string):Promise<Article[]> {

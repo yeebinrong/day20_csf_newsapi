@@ -1,11 +1,16 @@
 <button mat-raised-button color="accent" [routerLink]="['/']">Back</button>
-<mat-card class="mt-1 mb-1" *ngFor="let article of detailed">
-    <p>Source {{article.name}}</p>
-    <p>Author {{article.author}}</p>
-    <p>title {{article.title}}</p>
-    <p>Description {{article.description}}</p>
-    <a href="{{article.url}}" target="_blank">{{article.url}}</a>
-    <img src="{{article.img}}">
-    <p>Publish time and date {{article.publishedAt}}</p>
-    <p>Content {{article.content}}</p>
-</mat-card>
+<div *ngIf="checkAPI">
+    <h1>Please check your API KEY</h1>
+</div>
+<ng-container *ngIf="!checkAPI">
+    <mat-card  class="mt-1 mb-1" *ngFor="let article of detailed">
+        <p>Source {{article.name}}</p>
+        <p>Author {{article.author}}</p>
+        <p>title {{article.title}}</p>
+        <p>Description {{article.description}}</p>
+        <a href="{{article.url}}" target="_blank">{{article.url}}</a>
+        <img src="{{article.img}}">
+        <p>Publish time and date {{article.publishedAt}}</p>
+        <p>Content {{article.content}}</p>
+    </mat-card>
+</ng-container>

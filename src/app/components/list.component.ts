@@ -22,16 +22,11 @@ export class ListComponent implements OnInit {
       console.info("db")
     }).catch(e => {
       console.info("not db")
-      this.getList()
-    })
-  }
-  
-  getList() {
-    this.NewsSvc.getList()
-    this.db.getList()
-    .then(data => {
-      this.CountryArray = data;
-      console.info(data)
+      this.NewsSvc.getList()
+      .then (a => {
+        this.CountryArray = a;
+        this.countryData = this.CountryArray['data'];
+      })
     })
   }
 
