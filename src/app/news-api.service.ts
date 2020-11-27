@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Article, countryArray, countryList } from './model';
 import { StorageDataBase } from './storage.database';
@@ -49,11 +49,11 @@ export class NewsAPIService {
   async getNews (code:string):Promise<Article[]> {
     let d = await this.db.getAPI();
     this.APIKEY = d['apikey'];
-    let headers = new Headers();
-    headers.append('apikey', this.APIKEY)
+    let headers = new HttpHeaders().set('apikey', this.APIKEY);
+    headers = headers.set('country', code);
     console.info(this.APIKEY);
     // @ts-ignore
-    const data:any[] = await this.http.get((this.newsENDPOINT + `country=${code}&apiKey=${this.APIKEY}`)).toPromise()
+    const data:any[] = await this.http.get((this.newsENDPOINT), {headers: headers}).toPromise()
     const articles:Article[] = data['articles'].map(d => {
       return {
         name: d.source.name,
