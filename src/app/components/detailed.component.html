@@ -1,11 +1,11 @@
 <button mat-raised-button color="accent" [routerLink]="['/']">Back</button>
 <mat-card class="mt-1 mb-1" *ngFor="let article of detailed">
-    <p>Source {{article.source.name}}</p>
+    <p>Source {{article.name}}</p>
     <p>Author {{article.author}}</p>
     <p>title {{article.title}}</p>
     <p>Description {{article.description}}</p>
     <a href="{{article.url}}" target="_blank">{{article.url}}</a>
-    <img src="{{article.urlToImage}}">
+    <img src="{{article.img}}">
     <p>Publish time and date {{article.publishedAt}}</p>
     <p>Content {{article.content}}</p>
 </mat-card>

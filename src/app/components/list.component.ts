@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { countryList } from '../model';
+import { countryArray, countryList } from '../model';
 import { NewsAPIService } from '../news-api.service';
 import { StorageDataBase } from '../storage.database';
 
@@ -12,14 +12,27 @@ import { StorageDataBase } from '../storage.database';
 export class ListComponent implements OnInit {
   constructor(private NewsSvc: NewsAPIService, private db: StorageDataBase, private router:Router) { }
   list = []
-  countryData = [];
+  CountryArray:countryArray;
+  countryData:countryList[];
   ngOnInit(): void { 
-    this.init()
+    this.db.getList()
+    .then(data => {
+      this.CountryArray = data;
+      this.countryData = this.CountryArray['data'];
+      console.info("db")
+    }).catch(e => {
+      console.info("not db")
+      this.getList()
+    })
   }
-
-  async init () {
-     this.countryData = await this.NewsSvc.getList()
-    await this.db.addList(this.countryData);
+  
+  getList() {
+    this.NewsSvc.getList()
+    this.db.getList()
+    .then(data => {
+      this.CountryArray = data;
+      console.info(data)
+    })
   }
 
   navigateTo(code:string) {

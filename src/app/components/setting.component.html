@@ -1,8 +1,9 @@
 Settings
-<form>
+<form #form [formGroup]="apiform">
     <mat-form-field>
-        <input matInput placeholder="API for newsapi.org">
+        <input matInput formControlName="apikey" placeholder="API for newsapi.org">
     </mat-form-field>
-    <button mat-raised-button [routerLink]="['/']">Back</button>
-    <button mat-raised-button>Delete</button>
+    <button type="button" mat-raised-button [routerLink]="['/']">Back</button>
+    <button type="button" mat-raised-button color="accent" (click)="deleteAPI()">Delete</button>
+    <button type="button" mat-raised-button color="primary" [disabled]="apiform.invalid" (click)="saveAPI()">Add</button>
 </form>
