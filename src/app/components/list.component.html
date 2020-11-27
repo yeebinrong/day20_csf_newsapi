@@ -1,1 +1,5 @@
 <p>list works!</p>
+<mat-card *ngFor="let country of countryData" (click)="navigateTo(country.alpha2Code)">
+    {{country.name}}
+    <img src="{{country.flag}}" alt="">
+</mat-card>

@@ -13,7 +13,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
 import { StorageDataBase } from './storage.database';
-import { NewsAPIServiceService } from './news-apiservice.service';
+import { NewsAPIService } from './news-api.service';
+
+import { RouterModule } from '@angular/router'
+
+const ROUTES = [
+  {path:'', component: ListComponent },
+  {path:'settings', component: SettingComponent },
+  {path:'detailed/:country', component: DetailedComponent },
+  {path:'**', redirectTo:'', pathMatch: 'full' },
+]
 
 @NgModule({
   declarations: [
@@ -29,10 +38,10 @@ import { NewsAPIServiceService } from './news-apiservice.service';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HttpClientModule
-
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES)
   ],
-  providers: [ StorageDataBase, NewsAPIServiceService ],
+  providers: [ StorageDataBase, NewsAPIService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
