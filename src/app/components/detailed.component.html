@@ -1,16 +1,19 @@
-<button mat-raised-button color="accent" [routerLink]="['/']">Back</button>
-<div *ngIf="checkAPI">
-    <h1>Please check your API KEY</h1>
+<div fxLayout="column">
+    <button class="ml-1 mr-1 mt-1 mb-1" mat-raised-button color="accent" [routerLink]="['/']">Back</button>
+    <div *ngIf="checkAPI">
+        <h1>Please check your API KEY</h1>
+    </div>
+    <ng-container *ngIf="!checkAPI">
+        <mat-card  class="mt-1 mb-1 ml-1 mr-1" *ngFor="let article of detailed" fxLayout="column" fxLayoutAlign="start stretch"> 
+            <mat-card-title>{{article.title}}</mat-card-title>
+            <p>Source: {{article.name}}</p>
+            <p>Author: {{article.author}}</p>
+            <p>Description: {{article.description}}</p>
+            <a href="{{article.url}}" target="_blank">{{article.url}}</a>
+            <img src="{{article.img}}">
+            <p>Published at: {{article.publishedAt}}</p>
+            <p>Content: {{article.content}}</p>
+            <button type="button" color="accent" mat-raised-button>Save</button>
+        </mat-card>
+    </ng-container>
 </div>
-<ng-container *ngIf="!checkAPI">
-    <mat-card  class="mt-1 mb-1" *ngFor="let article of detailed">
-        <p>Source {{article.name}}</p>
-        <p>Author {{article.author}}</p>
-        <p>title {{article.title}}</p>
-        <p>Description {{article.description}}</p>
-        <a href="{{article.url}}" target="_blank">{{article.url}}</a>
-        <img src="{{article.img}}">
-        <p>Publish time and date {{article.publishedAt}}</p>
-        <p>Content {{article.content}}</p>
-    </mat-card>
-</ng-container>

@@ -49,6 +49,8 @@ export class NewsAPIService {
   async getNews (code:string):Promise<Article[]> {
     let d = await this.db.getAPI();
     this.APIKEY = d['apikey'];
+    let headers = new Headers();
+    headers.append('apikey', this.APIKEY)
     console.info(this.APIKEY);
     // @ts-ignore
     const data:any[] = await this.http.get((this.newsENDPOINT + `country=${code}&apiKey=${this.APIKEY}`)).toPromise()
